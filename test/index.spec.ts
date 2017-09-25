@@ -55,4 +55,14 @@ describe("@async-generator/first", () => {
 
     expect(result).to.be.eq(expected);
   });
+
+  it("should await predicate", async () => {
+    let source = async function* () {
+      yield 1; yield 2; yield 3; yield 4;
+    }
+    let expected = 3;
+    let result = await first(source(), async (x) => x == expected);
+
+    expect(result).to.be.eq(expected);
+  });
 })

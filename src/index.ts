@@ -10,10 +10,10 @@ async function basic<T>(
 
 async function predicated<T>(
   source: AsyncIterable<T> | Iterable<T>,
-  predicate: (item: T) => boolean
+  predicate: (item: T) => Promise<boolean> | boolean
 ): Promise<T | undefined> {
   for await (let item of iterable(source)) {
-    if (predicate(item)) { return item; }
+    if (await predicate(item)) { return item; }
   }
 }
 
@@ -22,15 +22,14 @@ export default function <T>(
 ): Promise<T | undefined>
 export default function <T>(
   source: AsyncIterable<T> | Iterable<T>,
-  predicate: (item: T) => boolean
+  predicate: (item: T) => Promise<boolean> | boolean
 ): Promise<T | undefined>
 export default function <T>(
   source: AsyncIterable<T> | Iterable<T>,
-  predicate?: (item: T) => boolean
+  predicate?: (item: T) => Promise<boolean> | boolean
 ): Promise<T | undefined> {
   if (predicate === undefined) {
     return basic(source);
   }
   return predicated(source, predicate);
 }
-
