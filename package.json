@@ -1,7 +1,7 @@
 {
   "name": "@async-generators/first",
   "description": "get the first (predicated) item from a source iterable",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": {
     "name": "Meirion Hughes",
     "email": "crakinshot@yahoo.com",
